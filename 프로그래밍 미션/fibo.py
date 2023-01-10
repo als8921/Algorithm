@@ -8,7 +8,7 @@ f[1]=1
 def fib(n):
     global fib_num
     fib_num+=1
-    if n==1 or n==2:
+    if n<=2:
         return 1
     else:
         return (fib(n-1) + fib(n-2))
