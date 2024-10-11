@@ -17,23 +17,20 @@ N개의 자연수 중에서 M개를 고른 수열
 N, M = map(int, input().split())
 arr = sorted(list(map(int, input().split())))
 
-result = []
 visited = [0] * N
-temp = []
-def dfs(i):
-    if(len(temp) == M):
-        if(not temp in result):
-            result.append(list(temp))
+answer = []
+def dfs():
+    past_node = None
+    if(len(answer) == M):
+        print(*answer)
         return
-    
-    for x in range(N):
-        if(visited[x] == 0):
-            visited[x] = 1
-            temp.append(arr[x])
-            dfs(x)
-            temp.pop()
-            visited[x] = 0
 
-dfs(0)
-for i in result:
-    print(*i)
+    for idx, node in enumerate(arr):
+        if(past_node != node and visited[idx] == 0):
+            past_node = node
+            visited[idx] = 1
+            answer.append(node)
+            dfs()
+            visited[idx] = 0
+            answer.pop()
+dfs()
