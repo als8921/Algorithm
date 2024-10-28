@@ -38,4 +38,4 @@ for _ in range(n):
     elif(cmd[0] == "all"):
         arr = set(range(1, 21))
     elif(cmd[0] == "empty"):
-        arr = []
+        arr = set()
