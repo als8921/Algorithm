@@ -16,25 +16,26 @@ empty: S를 공집합으로 바꾼다.
 출력
 check 연산이 주어질때마다, 결과를 출력한다.
 """
-n = int(input())
+import sys
+n = int(sys.stdin.readline())
 arr = set()
 for _ in range(n):
-    cmd = list(input().split())
+    cmd = list(sys.stdin.readline().split())
     if(cmd[0] == "add"):
-        arr.add(cmd[1])
+        arr.add(int(cmd[1]))
     elif(cmd[0] == "remove"):
-        if(cmd[1] in arr):
-            arr.remove(cmd[1])
+        if(int(cmd[1]) in arr):
+            arr.remove(int(cmd[1]))
     elif(cmd[0] == "check"):
-        if(cmd[1] in arr):
+        if(int(cmd[1]) in arr):
             print(1)
         else:
             print(0)
     elif(cmd[0] == "toggle"):
-        if(cmd[1] in arr):
-            arr.remove(cmd[1])
+        if(int(cmd[1]) in arr):
+            arr.remove(int(cmd[1]))
         else:
-            arr.add(cmd[1])
+            arr.add(int(cmd[1]))
     elif(cmd[0] == "all"):
         arr = set(range(1, 21))
     elif(cmd[0] == "empty"):
