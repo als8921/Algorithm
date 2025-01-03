@@ -14,17 +14,23 @@ i(2 ≤ i ≤ N-1)번 집의 색은 i-1번, i+1번 집의 색과 같지 않아�
 첫째 줄에 모든 집을 칠하는 비용의 최솟값을 출력한다.
 """
 n = int(input())
-a0, a1, a2 = 0, 0, 0
+a = []
+ans = 999999999
 for i in range(n):
-    arr = list(map(int, input().split()))
-    temp0 = arr[0] + min(a1, a2)
-    temp1 = arr[1] + min(a0, a2)
-    temp2 = arr[2] + min(a0, a1)
+    a.append(list(map(int, input().split())))
+for i in range(3):
+    dp = [[999999999, 999999999, 999999999] for _ in range(n)]
+    dp[0][i] = a[0][i]
 
-    a0, a1, a2 = temp0, temp1, temp2
+    for j in range(1, n):
+        dp[j][0] = a[j][0] + min(dp[j-1][1], dp[j-1][2])
+        dp[j][1] = a[j][1] + min(dp[j-1][0], dp[j-1][2])
+        dp[j][2] = a[j][2] + min(dp[j-1][0], dp[j-1][1])
 
-print(min(a0, a1, a2))
-
+    for j in range(3):
+        if i!=j:
+            ans = min(ans, dp[-1][j])
+print(ans)
 """
 3
 26 40 83
