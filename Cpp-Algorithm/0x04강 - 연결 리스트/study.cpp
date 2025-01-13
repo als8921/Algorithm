@@ -41,10 +41,24 @@ void erase(int addr){
 }
 int main()
 {
+    /*
+    직접 구현하기
     setData();
     traverse();
     insert(5, 444);
     traverse();
     erase(5);
     traverse();
+    */
+
+   //STL
+   list<int> L = {1, 2};
+   list<int>::iterator t = L.begin();
+//    auto t = L.begin();
+   L.push_back(5);
+   L.insert(t, 10); //t가 가리키는 곳 앞에 10 추가
+   t++;
+   t = L.erase(t); //t가 가리키는 원소 삭제, 다음 원소의 위치 반환
+   for(int e : L)
+   cout << e << "\n";
 }
