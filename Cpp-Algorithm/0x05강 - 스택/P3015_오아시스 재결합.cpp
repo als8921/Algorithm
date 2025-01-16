@@ -14,22 +14,7 @@ int main()
         int h;
         cin >> h;
         if(!s.empty() && s.top() > h) ans++;
-        else if(!s.empty() && s.top() == h) 
-        {
-            stack<int> temp;
-            while(!s.empty() && s.top() >= h)
-            {
-                temp.push(s.top());
-                s.pop();
-                ans++;
-            }
-            while(!temp.empty())
-            {
-                s.push(temp.top());
-                temp.pop();
-            }
-        }
-        else if(!s.empty() && s.top() < h) 
+        else if(!s.empty() && s.top() <= h) 
         {
             int lastH = 0;
             stack<int> temp;
