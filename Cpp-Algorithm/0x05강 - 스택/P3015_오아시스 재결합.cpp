@@ -8,32 +8,35 @@ int main()
     cin >> n;
 
 
-    stack<int> s;
+    stack<pair<int, int>> s;
     while(n--)
     {
         int h;
         cin >> h;
-        if(!s.empty() && s.top() > h) ans++;
-        else if(!s.empty() && s.top() <= h) 
-        {
-            int lastH = 0;
-            stack<int> temp;
 
-            while(!s.empty() && h >= lastH)
+        while(!s.empty() && s.top().first < h)
+        {
+            ans += s.top().second;
+            s.pop();
+        }
+        if(s.empty()) s.push({h, 1});
+        else
+        {
+            if(!s.empty() && s.top().first == h)
             {
-                temp.push(s.top());
-                lastH = s.top();
+                int cnt = s.top().second;
                 s.pop();
-                ans++;
+                if(!s.empty()) ans++;
+                ans += cnt;
+                s.push({h, cnt + 1});
             }
-            while(!temp.empty())
+
+            if(!s.empty() && s.top().first > h) 
             {
-                if(temp.top() >= h)
-                    s.push(temp.top());
-                temp.pop();
+                ans++;
+                s.push({h, 1});
             }
         }
-        s.push(h);
     }
     cout << ans;
 }
