@@ -42,31 +42,28 @@ long long maxArea(vector<int> height){
     stack<pair<int, int>> s;
     for(int i = 0; i < (int)height.size(); i++)
     {
+        int idx = i;
+        int h = height[i];
         area = max(area, (long long) height[i]);
         if(s.empty())
         { 
-            s.push({i, height[i]});
+            s.push({idx, h});
         }
         else if(!s.empty() && s.top().second < height[i])
         {
-            // area = max(area, (long long) (i - s.top().first + 1) * s.top().second);
-            s.push({i, height[i]});
+            s.push({idx, h});
         }
-        else if(!s.empty() && s.top().second == height[i])
-        {
-            area = max(area, (long long) (i - s.top().first + 1) * s.top().second);
-        }
-        else if(!s.empty() && s.top().second > height[i])
+        else if(!s.empty() && s.top().second >= height[i])
         {
             area = max(area, (long long) (i - s.top().first + 1) * height[i]);
-            pair<int, int> temp;
             while(!s.empty() && s.top().second >= height[i])
             {   
-                temp = s.top();
-                area = max(area, (long long) (i - temp.first) * temp.second);
+                idx = s.top().first;
+                h = s.top().second;
+                area = max(area, (long long) (i - idx) * h);
                 s.pop();
             }
-            s.push({temp.first, height[i]});
+            s.push({idx, height[i]});
         }
         // printStack(s);
         // cout << "++++++++++++++++++++++++++++++++++++++   " <<area<<"\n";
