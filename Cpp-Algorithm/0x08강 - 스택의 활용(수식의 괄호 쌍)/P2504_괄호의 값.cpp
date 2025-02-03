@@ -11,22 +11,26 @@ int main()
     stack<char> stk;
     int result = 0;
     int temp = 1;
-    for(char c : input)
+    for(int i = 0; i < (int)input.size(); i++)
     {
+        char c = input[i];
         if(c == '(')
         {
+            temp *= 2;
             stk.push(c);
         }
         else if(c == '[')
         {
+            temp *= 3;
             stk.push(c);
         }
         else if(c == ')')
         {
             if(!stk.empty() && stk.top() == '(') 
             {
+                if(input[i-1] == '(') result += temp;
+                temp /= 2;
                 stk.pop();
-                temp *= 2;
             }
             else
             {
@@ -38,8 +42,9 @@ int main()
         {
             if(!stk.empty() && stk.top() == '[')
             {
+                if(input[i-1] == '[') result += temp;
+                temp /= 3;
                 stk.pop();
-                temp *= 3;
             }
             else
             {
@@ -48,20 +53,7 @@ int main()
             }
             
         }
-        if(stk.empty())
-        {
-            result += temp;
-            temp = 1;
-        }
     }
+    if(!stk.empty()) result = 0;
     cout << result << "\n";
 }
-
-/*
-(()[[]])([])
-
-(2 + 3 * 3) * 2 + 3 * 2
-
-
-2 + 3
-*/
