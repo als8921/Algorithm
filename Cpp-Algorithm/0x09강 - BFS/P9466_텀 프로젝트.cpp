@@ -1,49 +1,45 @@
 #include<bits/stdc++.h>
 using namespace std;
+
+int selected[100001];
+int visited[100001];
+int done[100001];
+int cnt = 0;
+
+void dfs(int node)
+{
+    visited[node] = 1;
+
+    int next = selected[node];
+
+    if(!visited[next]) dfs(next);
+
+    if(!done[next])
+    {
+        for(int i = next; i != node; i = selected[i]) cnt++;
+        cnt++;
+    }
+    done[node] = 1;
+}
+
 int main()
 {
     int N; cin >> N;
     while(N--)
     {
         int n; cin >> n;
-        int select[n+1] = {0, };
-        int visited[n+1] = {0, };
+        cnt = 0;
+        fill(selected, selected + 100001, 0);
+        fill(visited, visited + 100001, 0);
+        fill(done, done + 100001, 0);
+
         for(int i = 1; i < n+1; i++) 
-        {
-            cin >> select[i];
-            if(select[i] == i) visited[i] = -1;
-        }
-    
+            cin >> selected[i];
         
         for(int i = 1; i < n+1; i++) 
         {
-            stack<int> S;
-            if(!visited[i]) S.push(i);
-            bool isTeam = false;
-            while (!S.empty())
-            {
-                int top = S.top(); S.pop();
-                if(visited[top] != 0) break;
-                visited[top] = i;
-                if(select[top] == i)
-                {
-                    isTeam = true;
-                    break;
-                }
-                S.push(select[top]);
-            }
-            if(!isTeam)
-            {
-                for(int k = 1; k < n+1; k++)
-                {
-                    if(visited[k] == i) visited[k] = 0;
-                } 
-            }
+            if(!visited[i]) dfs(i);
         }
-        int result = 0;
-        for(int i = 1; i < n+1; i++)
-            if(visited[i] == 0) result++;
-        
-        cout << result << "\n";
+        cout << n - cnt << "\n";
     }
 }
