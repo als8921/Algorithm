@@ -2,8 +2,10 @@
 using namespace std;
 
 int h, w;
-char cctvPos[8][8];
-char graph[8][8];
+char cctvPos[9][9];
+char graph[9][9];
+int result = 64;
+int dir[6] = {0, 4, 2, 4, 4, 1};
 vector<vector<int>> cctvList;
 
 void cctv1(int cy, int cx, int dir)
@@ -13,28 +15,28 @@ void cctv1(int cy, int cx, int dir)
     case 0:
         for(int x = cx + 1; x < w; x++)
         {
-            if(cctvPos[cy][x] != '0') break;
+            if(cctvPos[cy][x] == '6') break;
             graph[cy][x] = '#';
         }
         break;
     case 1:
         for(int y = cy + 1; y < h; y++)
         {
-            if(cctvPos[y][cx] != '0') break;
+            if(cctvPos[y][cx] == '6') break;
             graph[y][cx] = '#';
         }
         break;
     case 2:
         for(int x = cx - 1; x >= 0; x--)
         {
-            if(cctvPos[cy][x] != '0') break;
+            if(cctvPos[cy][x] == '6') break;
             graph[cy][x] = '#';
         }
         break;
     case 3:
         for(int y = cy - 1; y >= 0; y--)
         {
-            if(cctvPos[y][cx] != '0') break;
+            if(cctvPos[y][cx] == '6') break;
             graph[y][cx] = '#';
         }
         break;
@@ -49,24 +51,24 @@ void cctv2(int cy, int cx, int dir)
     case 0:
         for(int x = cx + 1; x < w; x++)
         {
-            if(cctvPos[cy][x] != '0') break;
+            if(cctvPos[cy][x] == '6') break;
             graph[cy][x] = '#';
         }
         for(int x = cx - 1; x >= 0; x--)
         {
-            if(cctvPos[cy][x] != '0') break;
+            if(cctvPos[cy][x] == '6') break;
             graph[cy][x] = '#';
         }
         break;
     case 1:
         for(int y = cy + 1; y < h; y++)
         {
-            if(cctvPos[y][cx] != '0') break;
+            if(cctvPos[y][cx] == '6') break;
             graph[y][cx] = '#';
         }
         for(int y = cy - 1; y >= 0; y--)
         {
-            if(cctvPos[y][cx] != '0') break;
+            if(cctvPos[y][cx] == '6') break;
             graph[y][cx] = '#';
         }
         break;
@@ -81,48 +83,48 @@ void cctv3(int cy, int cx, int dir)
     case 0:
         for(int y = cy + 1; y < h; y++)
         {
-            if(cctvPos[y][cx] != '0') break;
+            if(cctvPos[y][cx] == '6') break;
             graph[y][cx] = '#';
         }
         for(int x = cx + 1; x < w; x++)
         {
-            if(cctvPos[cy][x] != '0') break;
+            if(cctvPos[cy][x] == '6') break;
             graph[cy][x] = '#';
         }
         break;
     case 1:
         for(int y = cy + 1; y < h; y++)
         {
-            if(cctvPos[y][cx] != '0') break;
+            if(cctvPos[y][cx] == '6') break;
             graph[y][cx] = '#';
         }
         for(int x = cx - 1; x >= 0; x--)
         {
-            if(cctvPos[cy][x] != '0') break;
+            if(cctvPos[cy][x] == '6') break;
             graph[cy][x] = '#';
         }
         break;
     case 2:
         for(int y = cy - 1; y >= 0; y--)
         {
-            if(cctvPos[y][cx] != '0') break;
+            if(cctvPos[y][cx] == '6') break;
             graph[y][cx] = '#';
         }
         for(int x = cx - 1; x >= 0; x--)
         {
-            if(cctvPos[cy][x] != '0') break;
+            if(cctvPos[cy][x] == '6') break;
             graph[cy][x] = '#';
         }
         break;
     case 3:
         for(int y = cy - 1; y >= 0; y--)
         {
-            if(cctvPos[y][cx] != '0') break;
+            if(cctvPos[y][cx] == '6') break;
             graph[y][cx] = '#';
         }
         for(int x = cx + 1; x < w; x++)
         {
-            if(cctvPos[cy][x] != '0') break;
+            if(cctvPos[cy][x] == '6') break;
             graph[cy][x] = '#';
         }
         break;
@@ -137,68 +139,68 @@ void cctv4(int cy, int cx, int dir)
     case 0:
         for(int x = cx + 1; x < w; x++)
         {
-            if(cctvPos[cy][x] != '0') break;
+            if(cctvPos[cy][x] == '6') break;
             graph[cy][x] = '#';
         }
         for(int y = cy + 1; y < h; y++)
         {
-            if(cctvPos[y][cx] != '0') break;
+            if(cctvPos[y][cx] == '6') break;
             graph[y][cx] = '#';
         }
         for(int y = cy - 1; y >= 0; y--)
         {
-            if(cctvPos[y][cx] != '0') break;
+            if(cctvPos[y][cx] == '6') break;
             graph[y][cx] = '#';
         }
         break;
     case 1:
         for(int y = cy + 1; y < h; y++)
         {
-            if(cctvPos[y][cx] != '0') break;
+            if(cctvPos[y][cx] == '6') break;
             graph[y][cx] = '#';
         }
         for(int x = cx + 1; x < w; x++)
         {
-            if(cctvPos[cy][x] != '0') break;
+            if(cctvPos[cy][x] == '6') break;
             graph[cy][x] = '#';
         }
         for(int x = cx - 1; x >= 0; x--)
         {
-            if(cctvPos[cy][x] != '0') break;
+            if(cctvPos[cy][x] == '6') break;
             graph[cy][x] = '#';
         }
         break;
     case 2:
         for(int x = cx - 1; x >= 0; x--)
         {
-            if(cctvPos[cy][x] != '0') break;
+            if(cctvPos[cy][x] == '6') break;
             graph[cy][x] = '#';
         }
         for(int y = cy + 1; y < h; y++)
         {
-            if(cctvPos[y][cx] != '0') break;
+            if(cctvPos[y][cx] == '6') break;
             graph[y][cx] = '#';
         }
         for(int y = cy - 1; y >= 0; y--)
         {
-            if(cctvPos[y][cx] != '0') break;
+            if(cctvPos[y][cx] == '6') break;
             graph[y][cx] = '#';
         }
         break;
     case 3:
         for(int y = cy - 1; y >= 0; y--)
         {
-            if(cctvPos[y][cx] != '0') break;
+            if(cctvPos[y][cx] == '6') break;
             graph[y][cx] = '#';
         }
         for(int x = cx + 1; x < w; x++)
         {
-            if(cctvPos[cy][x] != '0') break;
+            if(cctvPos[cy][x] == '6') break;
             graph[cy][x] = '#';
         }
         for(int x = cx - 1; x >= 0; x--)
         {
-            if(cctvPos[cy][x] != '0') break;
+            if(cctvPos[cy][x] == '6') break;
             graph[cy][x] = '#';
         }
         break;
@@ -213,22 +215,22 @@ void cctv5(int cy, int cx, int dir)
     case 0:
         for(int x = cx + 1; x < w; x++)
         {
-            if(cctvPos[cy][x] != '0') break;
+            if(cctvPos[cy][x] == '6') break;
             graph[cy][x] = '#';
         }
         for(int x = cx - 1; x >= 0; x--)
         {
-            if(cctvPos[cy][x] != '0') break;
+            if(cctvPos[cy][x] == '6') break;
             graph[cy][x] = '#';
         }
         for(int y = cy + 1; y < h; y++)
         {
-            if(cctvPos[y][cx] != '0') break;
+            if(cctvPos[y][cx] == '6') break;
             graph[y][cx] = '#';
         }
         for(int y = cy - 1; y >= 0; y--)
         {
-            if(cctvPos[y][cx] != '0') break;
+            if(cctvPos[y][cx] == '6') break;
             graph[y][cx] = '#';
         }
         break;
@@ -243,17 +245,6 @@ void resetGraph()
         strcpy(graph[i], cctvPos[i]);
 }
 
-// void search(int depth)
-// {
-//     if(depth == cctvList.size())
-//     {
-//         cout << countSpace() << " : Count";
-//     }
-//     if(cctvList[depth][0] == 1)
-//     {
-//         cctv1()
-//     }
-// }
 int countSpace()
 {
     int count = 0;
@@ -263,9 +254,71 @@ int countSpace()
     
     return count;
 }
+void dfs(int depth)
+{
+    if(depth == cctvList.size())
+    {
+        result = min(result, countSpace());
+        return;
+    }
+
+    int cctvType = cctvList[depth][0];
+    int y = cctvList[depth][1];
+    int x = cctvList[depth][2];
+
+    char temp[8][8];
+    
+    for(int i = 0; i < h; i++)
+        strcpy(temp[i], graph[i]);
+
+    if(cctvType == 1)
+    {
+        for(int i = 0; i < dir[1]; i++){
+            cctv1(y, x, i);
+            dfs(depth + 1);
+            for(int i = 0; i < h; i++)
+                strcpy(graph[i], temp[i]);
+        }
+    }
+    else if(cctvType == 2)
+    {
+        for(int i = 0; i < dir[2]; i++){
+            cctv2(y, x, i);
+            dfs(depth + 1);
+            for(int i = 0; i < h; i++)
+                strcpy(graph[i], temp[i]);
+        }
+    }
+    else if(cctvType == 3)
+    {
+        for(int i = 0; i < dir[3]; i++){
+            cctv3(y, x, i);
+            dfs(depth + 1);
+            for(int i = 0; i < h; i++)
+                strcpy(graph[i], temp[i]);
+        }
+    }
+    else if(cctvType == 4)
+    {
+        for(int i = 0; i < dir[4]; i++){
+            cctv4(y, x, i);
+            dfs(depth + 1);
+            for(int i = 0; i < h; i++)
+                strcpy(graph[i], temp[i]);
+        }
+    }
+    else if(cctvType == 5)
+    {
+        for(int i = 0; i < dir[5]; i++){
+            cctv5(y, x, i);
+            dfs(depth + 1);
+            for(int i = 0; i < h; i++)
+                strcpy(graph[i], temp[i]);
+        }
+    }
+}
 int main()
 {
-    int dir[6] = {0, 4, 2, 4, 4, 1};
     cin >> h >> w;
     for(int y = 0; y < h; y++)
         for(int x = 0; x < w; x++)
@@ -279,48 +332,6 @@ int main()
         }
     
     resetGraph();
-
-    // search(0);
-
-    for(vector<int> cctv : cctvList)
-    {
-        switch (cctv[0])
-        {
-        case 1:
-            for(int i = 0; i < dir[1]; i++)
-                cctv1(cctv[1], cctv[2], i);
-            break;
-        case 2:
-            for(int i = 0; i < dir[2]; i++)
-                cctv2(cctv[1], cctv[2], i);
-            break;
-        case 3:
-            for(int i = 0; i < dir[3]; i++)
-                cctv3(cctv[1], cctv[2], i);
-            break;
-        case 4:
-            for(int i = 0; i < dir[4]; i++)
-                cctv4(cctv[1], cctv[2], i);
-            break;
-        case 5:
-            for(int i = 0; i < dir[5]; i++)
-                cctv5(cctv[1], cctv[2], i);
-            break;
-        
-        default:
-            break;
-        }
-    }
-
-
-
-
-
-    cout << "--------------------------\n";
-    for(int y = 0; y < h; y++)
-    {
-        for(int x = 0; x < w; x++)
-            cout <<  graph[y][x] << " ";
-        cout << "\n";
-    }
+    dfs(0);
+    cout << result << "\n";
 }
